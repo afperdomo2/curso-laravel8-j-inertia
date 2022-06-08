@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
+import { Link } from '@inertiajs/inertia-vue3';
 
 defineProps({
     note: Object,
@@ -31,9 +32,9 @@ defineProps({
                         <div class="shadow bg-white md:rounded-md p-4">
                             <p>{{ note.content }}</p>
                             <hr class="my-6">
-                            <inertia-link :href="route('notes.index')">
+                            <Link :href="route('notes.index')">
                                 Volver
-                            </inertia-link>
+                            </Link>
                         </div>
                     </div>
 
