@@ -30,7 +30,11 @@ defineProps({
 
                     <div class="md:col-span-2 mt-5 md:mt-0">
                         <div class="shadow bg-white md:rounded-md p-4">
-                            <table>
+                            <Link
+                                :href="route('notes.create')"
+                                class="bg-emerald-500 text-white font-bold px-4 py-2 rounded-md"
+                            >Crear</Link>
+                            <table class="mt-4">
                                 <tr v-for="note in notes" v-bind:key="note.id">
                                     <td class="border px-4 py-2">
                                         {{ note.excerpt }}

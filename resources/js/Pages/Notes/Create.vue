@@ -2,17 +2,15 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { useForm , Link } from '@inertiajs/inertia-vue3';
 
-const props = defineProps({
-    note: Object,
-});
+const props = defineProps({});
 
 const form = useForm({
-    excerpt: props.note.excerpt,
-    content: props.note.content
+    excerpt: '',
+    content: ''
 });
 
 const submit = () => {
-    form.put(route('notes.update', props.note), form);
+    form.post(route('notes.store'), form);
 }
 </script>
 
@@ -30,9 +28,9 @@ const submit = () => {
 
                     <div class="md:col-span-1">
                         <div class="px-4 sm:px0">
-                            <h3 class="text-lg text-gray-900">Editar una nota</h3>
+                            <h3 class="text-lg text-gray-900">Crear una nota</h3>
                             <p class="text-sm text-gray-600">
-                                Si editas no podrás volver al estado anterior
+                                Luego de crear podrás editar
                             </p>
                         </div>
                     </div>
@@ -56,8 +54,8 @@ const submit = () => {
                                     rows="8"
                                 ></textarea>
                                 <button
-                                    class="bg-emerald-500 hover:bg-emelard-600 text-white rounded-sm font-bold py-2 px-4 mr-2"
-                                >Editar</button>
+                                    class="bg-emerald-500 hover:bg-emerald-600 text-white rounded-sm font-bold py-2 px-4 mr-2"
+                                >Crear</button>
                                 <Link
                                     :href="route('notes.index')"
                                     class="bg-blue-500 hover:bg-blue-600 text-white rounded-sm font-bold py-2 px-4"
