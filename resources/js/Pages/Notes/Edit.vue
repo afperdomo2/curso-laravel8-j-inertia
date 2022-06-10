@@ -14,6 +14,11 @@ const form = useForm({
 const submit = () => {
     form.put(route('notes.update', props.note), form);
 }
+const destroy = () => {
+    if (confirm('¿Desea eliminar la nota?')) {
+        form.delete(route('notes.destroy', props.note));
+    }
+}
 </script>
 
 <template>
@@ -58,6 +63,10 @@ const submit = () => {
                                 <button
                                     class="bg-emerald-500 hover:bg-emelard-600 text-white rounded-sm font-bold py-2 px-4 mr-2"
                                 >Editar</button>
+                                <a
+                                    href="#" @click.prevent="destroy"
+                                    class="bg-rose-500 hover:bg-rose-600 text-white rounded-sm font-bold py-2 px-4 mr-2"
+                                >Eliminar nota</a>
                                 <Link
                                     :href="route('notes.index')"
                                     class="bg-blue-500 hover:bg-blue-600 text-white rounded-sm font-bold py-2 px-4"

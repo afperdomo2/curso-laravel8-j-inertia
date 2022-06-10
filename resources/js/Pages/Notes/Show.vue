@@ -32,9 +32,10 @@ defineProps({
                         <div class="shadow bg-white md:rounded-md p-4">
                             <p>{{ note.content }}</p>
                             <hr class="my-6">
-                            <Link :href="route('notes.index')">
-                                Volver
-                            </Link>
+                            <Link
+                                :href="route('notes.index')"
+                                class="bg-blue-500 hover:bg-blue-600 text-white rounded-sm font-bold py-2 px-4"
+                            >Volver</Link>
                         </div>
                     </div>
 

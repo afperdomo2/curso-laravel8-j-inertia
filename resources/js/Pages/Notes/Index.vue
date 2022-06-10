@@ -1,10 +1,16 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { useForm, Link } from '@inertiajs/inertia-vue3';
 
 defineProps({
     notes: Array,
 });
+
+const destroy = (noteId) => {
+    if (confirm('¿Desea eliminar la nota?')) {
+        useForm().delete(route('notes.destroy', noteId));
+    }
+}
 </script>
 
 <template>
@@ -39,15 +45,29 @@ defineProps({
                                     <td class="border px-4 py-2">
                                         {{ note.excerpt }}
                                     </td>
-                                    <td class="border px-4 py-2">
-                                        <Link :href="route('notes.show', note)">
+                                    <td class="border px-1 py-2">
+                                        <Link
+                                            :href="route('notes.show', note)"
+                                            class="bg-blue-500 hover:bg-blue-600 text-white rounded-sm font-bold py-1 px-2"
+                                        >
                                             Ver
                                         </Link>
                                     </td>
-                                    <td class="border px-4 py-2">
-                                        <Link :href="route('notes.edit', note)">
+                                    <td class="border px-1 py-2">
+                                        <Link
+                                            :href="route('notes.edit', note)"
+                                            class="bg-emerald-500 hover:bg-emerald-600 text-white rounded-sm font-bold py-1 px-2"
+                                        >
                                             Editar
                                         </Link>
+                                    </td>
+                                    <td class="border px-1 py-2">
+                                        <a
+                                            href="#" @click.prevent="destroy(note.id)"
+                                            class="bg-rose-500 hover:bg-rose-600 text-white rounded-sm font-bold py-1 px-2"
+                                        >
+                                            Eliminar
+                                        </a>
                                     </td>
                                 </tr>
                             </table>
