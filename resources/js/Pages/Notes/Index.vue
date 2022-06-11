@@ -1,16 +1,25 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { useForm, Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
+import { Inertia } from '@inertiajs/inertia'
 
 defineProps({
-    notes: Array,
+    notes: Array
 });
+
+const valor = ref(null);
 
 const destroy = (noteId) => {
     if (confirm('¿Desea eliminar la nota?')) {
-        useForm().delete(route('notes.destroy', noteId));
+        Inertia.delete(route('notes.destroy', noteId));
     }
 }
+
+const search = () => {
+    let q = valor.value;
+    Inertia.get(route('notes.index', {q}), {}, { preserveState: true });
+};
 </script>
 
 <template>
@@ -36,11 +45,17 @@ const destroy = (noteId) => {
 
                     <div class="md:col-span-2 mt-5 md:mt-0">
                         <div class="shadow bg-white md:rounded-md p-4">
-                            <Link
-                                :href="route('notes.create')"
-                                class="bg-emerald-500 text-white font-bold px-4 py-2 rounded-md"
-                            >Crear</Link>
-                            <table class="mt-4">
+                            <div class="flex justify-between">
+                                <input type="text" class="form-input rounded-md shadow-sm" placeholder="Buscar..." v-model="valor" @keyup="search">
+                                <Link
+                                    :href="route('notes.create')"
+                                    class="bg-emerald-500 text-white font-bold px-4 py-2 rounded-md"
+                                >
+                                    Crear
+                                </Link>
+                            </div>
+                            <hr class="my-4">
+                            <table>
                                 <tr v-for="note in notes" v-bind:key="note.id">
                                     <td class="border px-4 py-2">
                                         {{ note.excerpt }}
